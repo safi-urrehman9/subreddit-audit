@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Subreddit Audit decides: the method behind the verdicts</title>
+<meta name="description" content="How Subreddit Audit judges Reddit Ads subreddits: it borrows strength from your whole account, needs 90% confidence to call a cut or a scale, and shows ranges. Includes tests on 4,000 simulated accounts.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/methodology/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="How Subreddit Audit decides: the method behind the verdicts">
+<meta property="og:description" content="How Subreddit Audit judges Reddit Ads subreddits: it borrows strength from your whole account, needs 90% confidence to call a cut or a scale, and shows ranges. Includes tests on 4,000 simulated accounts.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/methodology/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Subreddit Audit decides: the method behind the verdicts">
+<meta name="twitter:description" content="How Subreddit Audit judges Reddit Ads subreddits: it borrows strength from your whole account, needs 90% confidence to call a cut or a scale, and shows ranges. Includes tests on 4,000 simulated accounts.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "How Subreddit Audit decides: the method behind the verdicts",
+  "datePublished": "2026-09-28",
+  "dateModified": "2026-09-29",
+  "url": "https://safi-urrehman9.github.io/subreddit-audit/methodology/",
+  "author": {
+   "@type": "Organization",
+   "name": "Subreddit Audit",
+   "url": "https://safi-urrehman9.github.io/subreddit-audit/"
+  },
+  "publisher": {
+   "@type": "Organization",
+   "name": "Subreddit Audit",
+   "url": "https://safi-urrehman9.github.io/subreddit-audit/"
+  },
+  "about": [
+   "Reddit Ads",
+   "Statistical confidence",
+   "Advertising measurement",
+   "Small-sample estimation"
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Subreddit Audit",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Methodology",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/methodology/"
+   }
+  ]
+ }
+]
+</script>
+
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="wrap article">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/subreddit-audit/">Subreddit Audit</a> / Methodology</nav>
+  <h1>How the audit decides</h1>
+  <p class="answer">Each subreddit is judged against the rest of your account, not on its own. Small subreddits borrow strength from the account; big ones keep their own numbers. A subreddit is marked cut when the audit is at least 90% sure its cost per conversion is above your target, and spend more when it is at least 90% sure it's below. Everything else is "keep testing".</p>
+  <p class="byline">Last updated 29 September 2026. This page explains how the audit thinks and shows how well it does. It doesn't publish the recipe.</p>
+
+  <h2>The problem with per-subreddit CPA</h2>
+  <p>Reddit Ads reports cost per conversion for each subreddit as spend divided by conversions. That estimate is fine when a subreddit has hundreds of clicks and wild when it has a handful. Four clicks with no conversions reads as an infinite cost; four clicks with one conversion reads as a spectacular one. Neither tells you much. Advertisers who act on those numbers cut good communities and pour money into lucky ones.</p>
+
+  <h2>How it thinks</h2>
+  <ul>
+    <li><strong>It borrows strength from the whole account.</strong> Your other subreddits show what conversion rates are normal for your product, and how much they vary. A subreddit with a few clicks is judged mostly on that, and moves away from it only as its own evidence builds up. A subreddit with thousands of clicks is judged on its own numbers.</li>
+    <li><strong>It asks how likely the subreddit is to miss your target.</strong> Not "what is its CPA?" but "how sure are we it costs more than you're willing to pay?" The audit only calls a cut or a scale when that certainty is at least 90%.</li>
+    <li><strong>It won't cut too early.</strong> A subreddit has to have spent about what one conversion is worth to you before it can be cut, however bad it looks. Before that, even a subreddit exactly on target would usually show no conversions, so the case for cutting would rest on the account average rather than on the subreddit itself.</li>
+    <li><strong>It shows a range, not a single number.</strong> The bars show where the true cost per conversion probably sits (an 80% range); the dot is the middle estimate. A wide bar means "we don't know yet".</li>
+  </ul>
+  <p>The same report always gives the same answer. There's no randomness in it.</p>
+  <p>If you don't enter a target, the account's overall cost per conversion is used. Reports with fewer than 20 conversions in total get a warning, because most calls there are "keep testing".</p>
+
+  <h2>Verdicts</h2>
+  <table>
+    <thead><tr><th>Verdict</th><th>What it means</th></tr></thead>
+    <tbody>
+      <tr><td>Cut</td><td>At least 90% sure this subreddit costs more per conversion than your target, and it has spent enough for that to be a real finding.</td></tr>
+      <tr><td>Spend more</td><td>At least 90% sure it costs less per conversion than your target.</td></tr>
+      <tr><td>Keep testing</td><td>Neither. There isn't enough evidence yet, or it's close to your target.</td></tr>
+    </tbody>
+  </table>
+  <p>For a cut subreddit, "over target" is the part of its spend that looks wasted at your target cost per conversion. It's an estimate of money you could move, not a guarantee.</p>
+
+  <h2>How well it works</h2>
+  <p>The audit was tested on over 4,000 simulated accounts across 24 situations where every subreddit's true conversion rate is known, and compared with judging each subreddit on its dashboard cost per conversion.</p>
+  <table>
+    <thead><tr><th>Account</th><th>Cuts that were right</th><th>Good subreddits cut</th><th>Dashboard CPA: good subreddits cut</th></tr></thead>
+    <tbody>
+      <tr><td>Typical, 25 subreddits</td><td>97%</td><td>3%</td><td>22%</td></tr>
+      <tr><td>Small, 6 subreddits</td><td>96%</td><td>2%</td><td>24%</td></tr>
+      <tr><td>One subreddit takes most of the spend</td><td>97%</td><td>2%</td><td>25%</td></tr>
+      <tr><td>A few disasters among good subreddits</td><td>96%</td><td>2%</td><td>33%</td></tr>
+      <tr><td>B2B: 0.3% conversion rate, $6 clicks</td><td>98%</td><td>1%</td><td>42%</td></tr>
+      <tr><td>Tiny budgets, about $40 per subreddit</td><td>91%</td><td>1%</td><td>45%</td></tr>
+    </tbody>
+  </table>
+  <p>On typical accounts the cuts catch about 85% of the money spent above target. The 80% ranges contain the true cost per conversion 78–83% of the time in every one of these. On tiny budgets the cuts catch about a fifth of the waste, because there isn't enough data to be sure; the audit says "keep testing" rather than guess. When conversion rates swing from day to day, the 80% ranges still hold about 80% of the time and 95–97% of cuts are right, as long as the report has a date column (see below). When recent conversions haven't come in yet, a 7-day report with a two-day delay used to cut 9% of good subreddits; it now cuts 4%, and its 80% ranges hold 78% of the time instead of 67%. In simulated accounts whose ads wear out over the report, the share of "spend more" money that was really over target going forward fell from 15% to 6% once the audit checked for fatigue, with no change on accounts that don't wear out.</p>
+
+  <h2>Assumptions and limits</h2>
+  <ul>
+    <li><strong>One account at a time.</strong> What's normal for your product is learned from the subreddits in your file. With fewer than about eight subreddits that picture is weak, and results lean on each subreddit's own data.</li>
+    <li><strong>Cost per click is treated as fixed</strong> within each subreddit over the report period.</li>
+    <li><strong>View-through conversions.</strong> If a subreddit shows more conversions than clicks, conversions are capped at clicks and you're warned. Pick a click-through conversions column if your export has one.</li>
+    <li><strong>Late conversions are allowed for.</strong> Reddit credits a conversion to the ad click, up to 28 days later by default, so the last few days of any report are missing conversions that haven't happened yet. With a date column, the audit estimates how quickly your conversions usually arrive, counts recent clicks for less, and tells you roughly how many are still to come. It only discounts clicks when the pattern is clear in your data, so a real slowdown isn't mistaken for delay; when the pattern is likely but not clear, it tells you conversions may still be missing without changing any call. And when a short or thin report can't rule out slower arrivals, a subreddit is only marked cut if it would still be cut with them, and the audit tells you how many it held back. Without a date column none of this can be checked, so the audit says so whenever it recommends a cut.</li>
+    <li><strong>Day-to-day swings are measured.</strong> If your export has a Date (or Day, Week, Month) column, the audit measures how much conversion rates swing between days beyond chance and counts each subreddit's data for less when they do. It tells you only when the swing shows up across your subreddits, not just in one or two, so random noise doesn't set off the warning. Without a date column it can't, and the ranges can be too narrow on a jumpy account.</li>
+    <li><strong>Ad fatigue is checked before "spend more".</strong> Ads often convert less as the same people keep seeing them, so the average over a report can flatter what the next dollar buys. With a date column, the audit checks whether conversion rates fell steadily across the whole account, separately from late conversions, which also thin out the last days. If they clearly did, each subreddit also gets a recent cost per conversion at the latest rate, and "spend more" is only given when that recent figure is also under target. It looks for one account-wide trend, so a single subreddit going stale while the rest hold steady still looks like a mediocre one; run the audit on recent date ranges.</li>
+    <li><strong>Subreddits are treated as exchangeable.</strong> The audit doesn't know that r/SaaS and r/startups are more alike than r/SaaS and r/gaming. Tiny subreddits are pulled toward the account as a whole.</li>
+  </ul>
+
+  <h2>The plan writer</h2>
+  <p>The optional plan is written by a language model (DeepSeek's deepseek-flash) from the audit's output. It gets the numbers and verdicts above plus precomputed totals, and is instructed not to invent figures or contradict the verdicts. It doesn't change any verdict. Its subreddit suggestions are ideas to check, not tested results. The first three plans every 30 days are free; after that a plan costs credits. The audit and its verdicts are free either way. There is also a <a href="/subreddit-audit/developers/">developer API</a>.</p>
+
+  <h2>Checking the work</h2>
+  <p>The model was checked against an independent implementation in Python's SciPy, and the two agree to the cent. Finer numerical resolution moves results by under 0.5%. The file reader was tested on 20 export variants, including semicolon-separated European files, totals rows, currency symbols and view-through columns.</p>
+  <p>The model itself isn't published. The validation above is how you can judge it, and you can test it yourself: run the free audit on an export you already understand and see whether the calls match your judgement.</p>
+
+  <div class="paper cta">
+    <p>See it on your own numbers. The audit runs in your browser.</p>
+    <a class="btn primary" href="/subreddit-audit/">Run a free audit</a>
+  </div>
+</article>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

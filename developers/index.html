@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subreddit Audit API: audit Reddit Ads subreddits from code</title>
+<meta name="description" content="REST API for Subreddit Audit. Send Reddit Ads rows or a CSV, get a cut, scale or keep-testing call for every subreddit, plus an optional action plan. Bearer key, 1 credit per audit, curl, JavaScript and Python examples.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/developers/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Subreddit Audit API: audit Reddit Ads subreddits from code">
+<meta property="og:description" content="REST API for Subreddit Audit. Send Reddit Ads rows or a CSV, get a cut, scale or keep-testing call for every subreddit, plus an optional action plan. Bearer key, 1 credit per audit, curl, JavaScript and Python examples.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/developers/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Subreddit Audit API: audit Reddit Ads subreddits from code">
+<meta name="twitter:description" content="REST API for Subreddit Audit. Send Reddit Ads rows or a CSV, get a cut, scale or keep-testing call for every subreddit, plus an optional action plan. Bearer key, 1 credit per audit, curl, JavaScript and Python examples.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Subreddit Audit API documentation",
+  "datePublished": "2026-09-29",
+  "dateModified": "2026-09-29",
+  "url": "https://safi-urrehman9.github.io/subreddit-audit/developers/",
+  "author": {
+   "@type": "Organization",
+   "name": "Subreddit Audit",
+   "url": "https://safi-urrehman9.github.io/subreddit-audit/"
+  },
+  "publisher": {
+   "@type": "Organization",
+   "name": "Subreddit Audit",
+   "url": "https://safi-urrehman9.github.io/subreddit-audit/"
+  },
+  "about": [
+   "Reddit Ads",
+   "REST API",
+   "Advertising measurement"
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Subreddit Audit",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "API",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/developers/"
+   }
+  ]
+ }
+]
+</script>
+
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<style>
+  .article pre.code { font: 13.5px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; padding: 14px 16px; margin: 12px 0 20px; overflow-x: auto; white-space: pre; }
+  .article code { font: .92em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; overflow-wrap: anywhere; }
+  .article pre.code code { overflow-wrap: normal; }
+</style>
+<article class="wrap article">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/subreddit-audit/">Subreddit Audit</a> / API</nav>
+  <h1>The Subreddit Audit API</h1>
+  <p class="answer">Send a Reddit Ads report by subreddit, as JSON rows or raw CSV text, and get back a verdict for every subreddit: cut, scale, keep testing or no clicks, with a likely cost per conversion and a range. An audit costs 1 credit and a written action plan costs 10. The same key works on the website.</p>
+  <p class="byline">Last updated 29 September 2026. Unlike the website, the API runs the audit on our server, so your rows or CSV text are sent to it. See <a href="/subreddit-audit/privacy/">privacy</a>.</p>
+
+  <h2>Quickstart</h2>
+  <p>Get a key (see <a href="#key">how to get a key</a>), then audit some rows. The base URL for everything below is:</p>
+  <pre class="paper code">https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api</pre>
+
+  <h3>curl</h3>
+  <pre class="paper code">curl -X POST https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/audit \
+  -H "Authorization: Bearer sa_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "target_cpa": 60,
+    "rows": [
+      {"subreddit": "r/SaaS",       "spend": 1500.50, "clicks": 1000, "conversions": 5},
+      {"subreddit": "r/startups",   "spend": 450,     "clicks": 300,  "conversions": 15},
+      {"subreddit": "r/webdev",     "spend": 140,     "clicks": 95,   "conversions": 0}
+    ]
+  }'</pre>
+
+  <h3>JavaScript (fetch)</h3>
+  <pre class="paper code">const BASE = "https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api";
+const res = await fetch(`${BASE}/v1/audit`, {
+  method: "POST",
+  headers: { Authorization: "Bearer sa_live_YOUR_KEY", "Content-Type": "application/json" },
+  body: JSON.stringify({
+    target_cpa: 60,
+    rows: [
+      { subreddit: "r/SaaS", spend: 1500.5, clicks: 1000, conversions: 5 },
+      { subreddit: "r/startups", spend: 450, clicks: 300, conversions: 15 },
+    ],
+  }),
+});
+const data = await res.json();
+if (!res.ok) throw new Error(`${data.error.code}: ${data.error.message}`);
+for (const s of data.subreddits) console.log(s.subreddit, s.verdict, s.likely_cpa);</pre>
+
+  <h3>Python (requests)</h3>
+  <pre class="paper code">import requests
+
+BASE = "https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api"
+HEADERS = {"Authorization": "Bearer sa_live_YOUR_KEY"}
+
+# Rows, or send the raw export as {"csv": text} and let the columns be detected
+with open("reddit-report.csv", encoding="utf-8") as f:
+    body = {"csv": f.read(), "target_cpa": 60}
+r = requests.post(f"{BASE}/v1/audit", json=body, headers=HEADERS, timeout=60)
+data = r.json()
+if not r.ok:
+    raise SystemExit(f"{data['error']['code']}: {data['error']['message']}")
+for s in data["subreddits"]:
+    print(s["subreddit"], s["verdict"], s["likely_cpa"])
+print("credits left:", data["credits_left"])</pre>
+
+  <h3>Write a plan</h3>
+  <p><code>/v1/plan</code> takes the same body as <code>/v1/audit</code>, plus an optional <code>product</code>, and returns the audit and the plan together:</p>
+  <pre class="paper code">curl -X POST https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/plan \
+  -H "Authorization: Bearer sa_live_YOUR_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"csv": "Community,Amount Spent (USD),Clicks,Conversions\nr/SaaS,1500.50,1000,5\nr/startups,450,300,15", "product": "invoicing software for freelancers"}'</pre>
+
+  <h3>Check your balance</h3>
+  <pre class="paper code">curl https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/usage \
+  -H "Authorization: Bearer sa_live_YOUR_KEY"</pre>
+
+  <h2>Authentication</h2>
+  <p>Send your key as a Bearer token on every request except <code>openapi.json</code>: <code>Authorization: Bearer sa_live_&hellip;</code>. Keys are <code>sa_live_</code> followed by 32 lowercase hex characters. Requests and responses are JSON (<code>Content-Type: application/json</code>).</p>
+  <p>Treat the key like a password: it spends your credits. CORS allows any origin because keys are meant to be held by developers, which also means a key embedded in a public web page can be copied. Call the API from a server or script you control.</p>
+
+  <h2>Endpoints</h2>
+  <table>
+    <thead><tr><th>Endpoint</th><th>Cost</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST /v1/audit</code></td><td>1 credit</td><td>Verdict, likely cost per conversion and range for every subreddit.</td></tr>
+      <tr><td><code>POST /v1/plan</code></td><td>10 credits</td><td>The audit, then an action plan and subreddits to test next.</td></tr>
+      <tr><td><code>GET /v1/usage</code></td><td>Free</td><td>Your balance and the last 20 credit changes.</td></tr>
+      <tr><td><code>GET /v1/openapi.json</code></td><td>Free, no key</td><td>The <a href="https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/openapi.json">OpenAPI 3.1 document</a>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>POST /v1/audit</h2>
+  <p>Send either <code>rows</code> or <code>csv</code>, not both.</p>
+  <h3>Request fields</h3>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>rows</code></td><td>array</td><td>1 to 2,000 objects: <code>subreddit</code> (string, with or without <code>r/</code>), <code>spend</code>, <code>clicks</code>, <code>conversions</code> (numbers, zero or more). Repeated subreddits are added together.</td></tr>
+      <tr><td><code>csv</code></td><td>string</td><td>The raw text of a Reddit Ads export by community. Comma, semicolon or tab separated. Columns are detected automatically.</td></tr>
+      <tr><td><code>columns</code></td><td>object</td><td>With <code>csv</code> only. Header names to use instead of detection: <code>{"subreddit": "Community", "spend": "Amount Spent (USD)", "clicks": "Clicks", "conversions": "Conversions"}</code>. All four are required and must match a header exactly.</td></tr>
+      <tr><td><code>target_cpa</code></td><td>number</td><td>Optional. Your target cost per conversion, above zero. Defaults to the account's overall cost per conversion.</td></tr>
+    </tbody>
+  </table>
+  <p>Requests are limited to 2,000 rows and 2 MB.</p>
+
+  <h3>Response fields</h3>
+  <table>
+    <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>target_cpa</code></td><td>number</td><td>The target used, yours or the account average.</td></tr>
+      <tr><td><code>total_spend</code></td><td>number</td><td>Spend across all rows with spend.</td></tr>
+      <tr><td><code>total_conversions</code></td><td>number</td><td>Conversions across those rows.</td></tr>
+      <tr><td><code>warnings</code></td><td>string[]</td><td>Things to know, such as fewer than 20 conversions in total or conversions above clicks.</td></tr>
+      <tr><td><code>subreddits</code></td><td>array</td><td>One entry per subreddit, highest spend first (fields below).</td></tr>
+      <tr><td><code>credits_left</code></td><td>integer</td><td>Your balance after this call.</td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead><tr><th>Subreddit field</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>subreddit</code></td><td>string</td><td>Always with the <code>r/</code> prefix.</td></tr>
+      <tr><td><code>spend</code>, <code>clicks</code>, <code>conversions</code></td><td>number</td><td>As sent. Conversions are capped at clicks.</td></tr>
+      <tr><td><code>dashboard_cpa</code></td><td>number or null</td><td>Spend divided by conversions, as Reddit shows it. Null when there are no conversions.</td></tr>
+      <tr><td><code>likely_cpa</code></td><td>number or null</td><td>The audit's middle estimate of the true cost per conversion. Null when there are no clicks.</td></tr>
+      <tr><td><code>likely_cpa_low</code>, <code>likely_cpa_high</code></td><td>number or null</td><td>The 80% range for the true cost per conversion. The high end can be very large for subreddits with little data.</td></tr>
+      <tr><td><code>prob_over_target</code></td><td>number or null</td><td>Chance, from 0 to 1, that the true cost per conversion is above the target.</td></tr>
+      <tr><td><code>verdict</code></td><td>string</td><td><code>cut</code>, <code>scale</code>, <code>keep_testing</code> or <code>no_clicks</code>. See the <a href="/subreddit-audit/methodology/">methodology</a>.</td></tr>
+      <tr><td><code>over_target</code></td><td>number</td><td>Estimated spend above what its conversions were worth at the target. Non-zero only for <code>cut</code>.</td></tr>
+    </tbody>
+  </table>
+  <p>An abridged response:</p>
+  <pre class="paper code">{
+  "target_cpa": 60,
+  "total_spend": 2916.5,
+  "total_conversions": 39,
+  "warnings": [],
+  "subreddits": [
+    {"subreddit": "r/SaaS", "spend": 1500.5, "clicks": 1000, "conversions": 5,
+     "dashboard_cpa": 300.1, "likely_cpa": 297.62, "likely_cpa_low": 177.15, "likely_cpa_high": 558.24,
+     "prob_over_target": 1, "verdict": "cut", "over_target": 1178.44},
+    {"subreddit": "r/startups", "spend": 450, "clicks": 300, "conversions": 15,
+     "dashboard_cpa": 30, "likely_cpa": 31.2, "likely_cpa_low": 22.95, "likely_cpa_high": 44.04,
+     "prob_over_target": 0.0103, "verdict": "scale", "over_target": 0}
+  ],
+  "credits_left": 299
+}</pre>
+  <p>The request that produced this had two more subreddits, which are left out here. Numbers are rounded: money to cents and probabilities to four places.</p>
+
+  <h2>POST /v1/plan</h2>
+  <p>Takes everything <code>/v1/audit</code> does, plus <code>product</code> (optional string, up to 140 characters: what you sell). It runs the audit, then the plan writer, and costs 10 credits in total. The credits are only kept if both succeed.</p>
+  <table>
+    <thead><tr><th>Response field</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>audit</code></td><td>object</td><td>The same as the <code>/v1/audit</code> response, without <code>credits_left</code>.</td></tr>
+      <tr><td><code>plan.summary</code></td><td>string</td><td>A short read on the account.</td></tr>
+      <tr><td><code>plan.actions</code></td><td>array</td><td>Objects with <code>do</code> and <code>why</code>: what to do this week.</td></tr>
+      <tr><td><code>plan.try_next</code></td><td>array</td><td>Objects with <code>subreddit</code> and <code>why</code>: communities worth testing. These are ideas, not tested results.</td></tr>
+      <tr><td><code>credits_left</code></td><td>integer</td><td>Your balance after this call.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>GET /v1/usage</h2>
+  <table>
+    <thead><tr><th>Response field</th><th>Type</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><code>prefix</code></td><td>string</td><td>The first 12 characters of your key.</td></tr>
+      <tr><td><code>credits</code></td><td>integer</td><td>Credits left.</td></tr>
+      <tr><td><code>created_at</code></td><td>string</td><td>When the key was created (ISO 8601).</td></tr>
+      <tr><td><code>last_used_at</code></td><td>string or null</td><td>When the key was last used.</td></tr>
+      <tr><td><code>recent</code></td><td>array</td><td>The last 20 credit changes: <code>delta</code> (negative for spending), <code>reason</code> (<code>purchase</code>, <code>plan</code>, <code>audit</code>, <code>refund</code> or <code>grant</code>), <code>ref</code> and <code>ts</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Errors</h2>
+  <p>Errors use the same shape every time: <code>{"error": {"code": "no_credits", "message": "..."}}</code>. Switch on <code>code</code>, not on the message.</p>
+  <table>
+    <thead><tr><th>Status</th><th>Code</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>400</td><td><code>bad_request</code></td><td>The body isn't valid: both or neither of <code>rows</code> and <code>csv</code>, a negative number, columns that can't be found, and similar. The message says which.</td></tr>
+      <tr><td>401</td><td><code>unauthorized</code></td><td>Missing, malformed, unknown or disabled key.</td></tr>
+      <tr><td>402</td><td><code>no_credits</code></td><td>Not enough credits for this call. <a href="/subreddit-audit/pricing/">Buy a pack</a>.</td></tr>
+      <tr><td>413</td><td><code>too_large</code></td><td>More than 2,000 rows or more than 2 MB.</td></tr>
+      <tr><td>429</td><td><code>rate_limited</code></td><td>More than 60 billed calls in a minute for this key. Wait and retry; the response has a <code>Retry-After</code> header.</td></tr>
+      <tr><td>500</td><td><code>internal</code></td><td>Something failed on our side. Credits taken for the call are put back.</td></tr>
+    </tbody>
+  </table>
+  <p>A malformed request that fails before it is billed costs nothing. If an audit or plan fails after the credits were taken, they are refunded. Unknown paths return 404 <code>not_found</code> and wrong methods 405 <code>method_not_allowed</code>, in the same error shape.</p>
+
+  <h2>Credits and pricing</h2>
+  <table>
+    <thead><tr><th>Pack</th><th>Price</th><th>Credits</th><th>That buys</th></tr></thead>
+    <tbody>
+      <tr><td>Starter</td><td>$9</td><td>300</td><td>300 audits, or 30 plans</td></tr>
+      <tr><td>Pro</td><td>$29</td><td>1,200</td><td>1,200 audits, or 120 plans</td></tr>
+    </tbody>
+  </table>
+  <p>An audit is 1 credit and a plan is 10. Packs are one-time payments, not subscriptions. Pay by card or crypto. Current prices are on the <a href="/subreddit-audit/pricing/">pricing page</a>.</p>
+  <p>A pack can be fully refunded within 14 days of purchase if none of its credits have been used; email <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a>. Credits for a call that fails after they were taken are put back automatically.</p>
+
+  <h2>Rate limits</h2>
+  <p>60 billed calls per minute per key. Over that you get 429 <code>rate_limited</code>. Requests are limited to 2,000 rows and 2 MB each.</p>
+
+  <h2 id="key">How to get a key</h2>
+  <p>Buy a credit pack on the <a href="/subreddit-audit/pricing/">pricing page</a> by card or crypto. When the payment clears you're shown a key starting <code>sa_live_</code>. Copy it then; there is no account or login. The same key works in the plan writer on the website and here. You can check its balance on the <code>/v1/usage</code> endpoint or on the account page.</p>
+
+  <h2>OpenAPI</h2>
+  <p>The machine-readable spec, for generating clients or importing into Postman or Insomnia: <a href="https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/openapi.json">openapi.json</a>. No key needed.</p>
+
+  <div class="paper cta">
+    <p>Try the audit first, free, in your browser.</p>
+    <a class="btn primary" href="/subreddit-audit/">Run a free audit</a>
+  </div>
+</article>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

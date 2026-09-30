@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reddit Ads test calculator: when to cut a subreddit</title>
+<meta name="description" content="Free calculator: enter your target cost per conversion, a subreddit's spend and its conversions, and see whether to cut it, spend more, or keep testing. Includes the 2.3x rule.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/reddit-ads-calculator/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Reddit Ads test calculator: when to cut a subreddit">
+<meta property="og:description" content="Free calculator: enter your target cost per conversion, a subreddit's spend and its conversions, and see whether to cut it, spend more, or keep testing. Includes the 2.3x rule.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/reddit-ads-calculator/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reddit Ads test calculator: when to cut a subreddit">
+<meta name="twitter:description" content="Free calculator: enter your target cost per conversion, a subreddit's spend and its conversions, and see whether to cut it, spend more, or keep testing. Includes the 2.3x rule.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Reddit Ads test calculator",
+  "url": "https://safi-urrehman9.github.io/subreddit-audit/reddit-ads-calculator/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (runs in the browser)",
+  "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "USD"
+  },
+  "description": "Tells you whether a subreddit's Reddit Ads results are strong enough to cut it or scale it, using a Poisson test at 90% confidence."
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Subreddit Audit",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Reddit Ads test calculator",
+    "item": "https://safi-urrehman9.github.io/subreddit-audit/reddit-ads-calculator/"
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "How much should I spend on a subreddit before cutting it?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "About 2.3 times your target cost per conversion if it has produced no conversions. With one conversion, wait until 3.9 times; with two, 5.3 times. At those points there is less than a 10% chance the subreddit is really hitting your target."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "What is the 2.3x rule for Reddit ads?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "If a subreddit has spent 2.3 times your target cost per conversion without a single conversion, cut it. The number comes from the Poisson distribution: a subreddit that truly converts at your target would show zero conversions over that much spend less than 10% of the time."
+    }
+   }
+  ]
+ }
+]
+</script>
+<script src="/subreddit-audit/calc.js?v=2bb14748" defer></script>
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="wrap article" style="max-width:900px">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/subreddit-audit/">Subreddit Audit</a> / Calculator</nav>
+  <h1>When should you cut a subreddit?</h1>
+  <p class="answer">Cut a subreddit once it has spent about 2.3 times your target cost per conversion with zero conversions. With one conversion, wait until 3.9 times; with two, 5.3 times. Before that point, a bad-looking number is usually noise.</p>
+
+  <div class="paper calc">
+    <form class="calc-in" onsubmit="return false">
+      <label for="c-target">Your target cost per conversion ($)<input id="c-target" type="number" min="0" step="any" value="80" inputmode="decimal"></label>
+      <label for="c-spend">Spent in this subreddit so far ($)<input id="c-spend" type="number" min="0" step="any" value="150" inputmode="decimal"></label>
+      <label for="c-conv">Conversions from this subreddit<input id="c-conv" type="number" min="0" step="1" value="0" inputmode="numeric"></label>
+    </form>
+    <div class="calc-out" aria-live="polite">
+      <p style="margin:0">The call</p>
+      <p class="verdict test" id="c-verdict">Keep testing</p>
+      <p id="c-why"></p>
+      <p class="next" id="c-next"></p>
+    </div>
+  </div>
+
+  <h2>How much to spend before you judge</h2>
+  <p>Multiply your target cost per conversion by the number in the right column. If a subreddit reaches that spend with no more conversions than the left column, cut it.</p>
+  <table>
+    <thead><tr><th>Conversions so far</th><th>Cut once spend reaches</th><th>Example at a $80 target</th></tr></thead>
+    <tbody>
+      <tr><td>0</td><td>2.3 × target</td><td>$184</td></tr>
+      <tr><td>1</td><td>3.9 × target</td><td>$311</td></tr>
+      <tr><td>2</td><td>5.3 × target</td><td>$426</td></tr>
+      <tr><td>3</td><td>6.7 × target</td><td>$534</td></tr>
+      <tr><td>4</td><td>8.0 × target</td><td>$640</td></tr>
+      <tr><td>5</td><td>9.3 × target</td><td>$742</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Where the 2.3 comes from</h2>
+  <p>Suppose a subreddit converts at exactly your target. Then every time it spends one target's worth of money, you expect one conversion. Conversions arrive randomly, so the count over a stretch of spend follows a Poisson distribution with mean equal to spend divided by target.</p>
+  <p class="paper formula">P(0 conversions) = e<sup>−spend / target</sup> &nbsp;≤ 0.10 &nbsp;⇔&nbsp; spend ≥ ln(10) × target ≈ 2.303 × target</p>
+  <p>So a subreddit that is truly on target shows zero conversions over 2.3 targets of spend less than 10% of the time. If you see that, it's probably not on target. The other rows solve the same equation for one, two, three conversions and so on. Your cost per click doesn't appear anywhere, which is why the rule works in any niche.</p>
+  <p>"Spend more" uses the mirror image: a subreddit is clearly beating target when a subreddit only at target would produce that many conversions less than 10% of the time.</p>
+
+  <h2>What this calculator doesn't know</h2>
+  <ul>
+    <li><strong>Your other subreddits.</strong> It judges one subreddit alone. The <a href="/subreddit-audit/">full audit</a> also uses how your whole account converts, so it can often call a subreddit sooner. In the sample report, r/webdev gets cut after $140 with no conversions, below the $184 that the 2.3× rule needs.</li>
+    <li><strong>Delayed conversions.</strong> If people usually buy days after clicking, recent spend hasn't had its chance yet. Leave out the last few days, or wait.</li>
+    <li><strong>View-through conversions.</strong> Reddit can count conversions from people who saw but didn't click an ad. Decide which conversions you trust before using any rule.</li>
+  </ul>
+
+  <div class="paper cta">
+    <p>Have a full report? The audit checks every subreddit at once and shows how much you'd save.</p>
+    <a class="btn primary" href="/subreddit-audit/">Run a free audit</a>
+  </div>
+</article>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

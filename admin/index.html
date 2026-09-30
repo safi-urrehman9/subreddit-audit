@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control room · Subreddit Audit</title>
+<meta name="description" content="Private usage dashboard.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/admin/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Control room · Subreddit Audit">
+<meta property="og:description" content="Private usage dashboard.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/admin/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Control room · Subreddit Audit">
+<meta name="twitter:description" content="Private usage dashboard.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[]
+</script>
+<script src="/subreddit-audit/admin.js?v=2bb14748" defer></script>
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<style>
+  .adm { --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --ok: #1a7f37; --warn: #b26a00; --bad: var(--red); max-width: 1320px; margin: 0 auto; padding: 18px 16px 80px; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .adm { --s1: #3987e5; --s2: #d95926; --s3: #199e70; --ok: #4ac26b; --warn: #e3a008; } }
+  :root[data-theme="dark"] .adm { --s1: #3987e5; --s2: #d95926; --s3: #199e70; --ok: #4ac26b; --warn: #e3a008; }
+  .adm h1 { font-size: clamp(34px, 4vw, 48px); margin: 6px 0 4px; }
+  .adm h2 { font-size: 24px; margin: 0 0 14px; }
+  .adm h3 { font-size: 16px; margin: 0 0 10px; }
+  .adm .sub { color: var(--muted); margin: 0 0 18px; }
+  .adm-bar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 0; background: var(--desk); border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .adm-bar .grp { display: flex; gap: 4px; flex-wrap: wrap; }
+  .adm-bar button, .adm-bar select, .adm button.lnk { font: inherit; font-size: 14px; padding: 6px 10px; border: 1px solid var(--line); background: var(--sheet); color: var(--ink); border-radius: 6px; cursor: pointer; }
+  .adm-bar button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); border-color: var(--ink); }
+  .adm-bar label { font-size: 14px; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
+  .adm-bar .spacer { flex: 1; }
+  .adm nav.jump { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
+  .adm .card { background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 18px; min-width: 0; }
+  .adm .grid { display: grid; gap: 14px; }
+  .adm .g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .adm .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .adm .kpis { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  .adm section { margin: 34px 0; scroll-margin-top: 70px; }
+  .kpi .v { font: 700 30px/1.1 "Bricolage Grotesque", sans-serif; letter-spacing: -0.02em; margin: 4px 0; font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: 14px; color: var(--muted); }
+  .kpi .d { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .kpi .d.up { color: var(--ok); } .kpi .d.down { color: var(--bad); } .kpi .d.inv.up { color: var(--bad); } .kpi .d.inv.down { color: var(--ok); }
+  .adm table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .adm th { text-align: left; font-weight: 600; color: var(--muted); font-size: 13px; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .adm td { padding: 6px 8px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .adm td.n, .adm th.n { text-align: right; }
+  .adm .scroll { overflow-x: auto; }
+  .adm .barcell { position: relative; }
+  .adm .barcell i { position: absolute; left: 0; top: 4px; bottom: 4px; background: color-mix(in srgb, var(--s1) 16%, transparent); border-radius: 0 4px 4px 0; }
+  .adm .barcell span { position: relative; word-break: break-all; }
+  .adm .empty { color: var(--muted); font-size: 14px; padding: 8px 0; }
+  .adm svg text { fill: var(--muted); font: 12px "Schibsted Grotesk", sans-serif; }
+  .adm .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+  .adm .legend b { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+  .adm .chart { position: relative; }
+  .adm .tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--sheet); font-size: 13px; padding: 6px 9px; border-radius: 6px; white-space: nowrap; transform: translate(-50%, -110%); display: none; z-index: 3; }
+  .adm .alerts { display: grid; gap: 6px; }
+  .adm .alert { display: flex; gap: 10px; align-items: baseline; font-size: 15px; }
+  .adm .alert .ic { font-weight: 700; width: 18px; text-align: center; }
+  .adm .alert.ok .ic { color: var(--ok); } .adm .alert.warn .ic { color: var(--warn); } .adm .alert.bad .ic { color: var(--bad); }
+  .adm .stack100 { display: flex; height: 26px; border-radius: 6px; overflow: hidden; gap: 2px; margin: 6px 0 8px; }
+  .adm .stack100 div { min-width: 2px; }
+  .adm .gate { max-width: 460px; margin: 60px auto; }
+  .adm .gate input { width: 100%; font: inherit; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--sheet); color: var(--ink); margin: 8px 0; }
+  .adm .gate button { font: inherit; padding: 10px 16px; border-radius: 8px; border: 0; background: var(--ink); color: var(--sheet); cursor: pointer; }
+  .adm .logtools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; font-size: 14px; }
+  .adm .logtools input, .adm .logtools select { font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--sheet); color: var(--ink); }
+  .adm .logtools input[type=search] { min-width: 220px; flex: 1; }
+  .adm tr.ev { cursor: pointer; }
+  .adm tr.ev:hover td { background: color-mix(in srgb, var(--s1) 6%, transparent); }
+  .adm pre { margin: 0; white-space: pre-wrap; word-break: break-all; font-size: 12px; background: var(--desk); padding: 8px; border-radius: 6px; }
+  .adm code, .adm .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+  .adm .tag { display: inline-block; font-size: 12px; padding: 1px 7px; border-radius: 10px; background: var(--wait-soft); color: var(--ink); white-space: nowrap; }
+  .adm .tag.err { background: var(--red-soft); } .adm .tag.good { background: color-mix(in srgb, var(--ok) 18%, transparent); } .adm .tag.act { background: var(--blue-soft); }
+  .adm .pager { display: flex; gap: 8px; align-items: center; margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .adm dialog { border: 1px solid var(--line); border-radius: 10px; background: var(--sheet); color: var(--ink); max-width: min(900px, 94vw); width: 100%; padding: 18px; }
+  .adm dialog::backdrop { background: rgba(0, 0, 0, .35); }
+  .adm .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+  @media (max-width: 900px) { .adm .g2, .adm .g3 { grid-template-columns: minmax(0, 1fr); } }
+</style>
+<div class="adm" id="main">
+  <div id="gate" class="gate card" hidden>
+    <h2 style="font-size:34px">Control room</h2>
+    <p class="sub">Private dashboard for Subreddit Audit. Enter the admin key.</p>
+    <form id="gate-form">
+      <input id="gate-key" type="password" autocomplete="current-password" placeholder="sa_…" required>
+      <label style="font-size:14px;color:var(--muted);display:flex;gap:6px;align-items:center;margin-bottom:12px"><input type="checkbox" id="gate-remember" checked style="width:auto;margin:0"> Remember on this browser</label>
+      <button type="submit">Open dashboard</button>
+      <p id="gate-err" class="note" style="color:var(--red)"></p>
+    </form>
+  </div>
+
+  <div id="app" hidden>
+    <h1 id="app-h1">Control room</h1>
+    <p class="sub" id="app-sub">Loading…</p>
+    <div class="adm-bar">
+      <div class="grp" id="range" role="group" aria-label="Date range">
+        <button data-d="1">24h</button><button data-d="7">7d</button><button data-d="30">30d</button><button data-d="90">90d</button><button data-d="365">1y</button>
+      </div>
+      <label>Time zone <select id="tz"></select></label>
+      <label><input type="checkbox" id="bots"> Include bots</label>
+      <label><input type="checkbox" id="auto" checked> Auto-refresh</label>
+      <label title="Stops track.js logging your own visits to the site from this browser"><input type="checkbox" id="notrack"> Don't count my visits</label>
+      <span class="spacer"></span>
+      <button id="refresh">Refresh</button>
+      <button id="logout">Lock</button>
+    </div>
+    <nav class="jump" aria-label="Sections"><a href="#s-over">Overview</a><a href="#s-acq">Acquisition</a><a href="#s-prod">Product</a><a href="#s-ai">Plan writer</a><a href="#s-rev">Revenue &amp; credits</a><a href="#s-err">Errors</a><a href="#s-logs">Event log</a><a href="#s-ailogs">AI log</a></nav>
+
+    <section id="s-over">
+      <div class="grid kpis" id="kpis"></div>
+      <div class="grid g2" style="margin-top:14px">
+        <div class="card"><h3>Health</h3><div class="alerts" id="alerts"></div></div>
+        <div class="card"><h3>Funnel (sessions)</h3><div id="funnel"></div></div>
+      </div>
+      <div class="card" style="margin-top:14px"><h3>Visitors and audits</h3><div class="chart" id="c-traffic"></div></div>
+      <div class="grid g2" style="margin-top:14px">
+        <div class="card"><h3>Page views by hour of day</h3><div class="chart" id="c-hours"></div></div>
+        <div class="card"><h3>Page views by weekday</h3><div class="chart" id="c-week"></div></div>
+      </div>
+    </section>
+
+    <section id="s-acq">
+      <h2>Acquisition</h2>
+      <div class="grid g2">
+        <div class="card"><h3>Referrers (sessions)</h3><div id="t-ref"></div></div>
+        <div class="card"><h3>Campaigns (utm source / medium / campaign)</h3><div id="t-utm"></div><p class="note">Tag links you post: <code>?utm_source=reddit&amp;utm_campaign=r-ppc-post</code>. A plain <code>?ref=x</code> also works.</p></div>
+        <div class="card"><h3>Pages</h3><div id="t-pages"></div></div>
+        <div class="card"><h3>Landing pages (sessions)</h3><div id="t-land"></div></div>
+        <div class="card"><h3>Engagement per page</h3><div id="t-eng"></div></div>
+        <div class="card"><h3>Countries (visitors)</h3><div id="t-country"></div></div>
+      </div>
+      <div class="grid g3" style="margin-top:14px">
+        <div class="card"><h3>Devices</h3><div id="t-dev"></div></div>
+        <div class="card"><h3>Browsers</h3><div id="t-br"></div></div>
+        <div class="card"><h3>Operating systems</h3><div id="t-os"></div></div>
+        <div class="card"><h3>Languages</h3><div id="t-lang"></div></div>
+        <div class="card"><h3>Outbound clicks</h3><div id="t-out"></div></div>
+        <div class="card"><h3>All event types</h3><div id="t-types"></div></div>
+      </div>
+    </section>
+
+    <section id="s-prod">
+      <h2>Product: audits on real files</h2>
+      <div class="grid g2">
+        <div class="card"><h3>Verdicts across all audited subreddits</h3><div id="verdicts"></div></div>
+        <div class="card"><h3>Audit runs</h3><div id="auditstats"></div></div>
+        <div class="card"><h3>Account size (subreddits per file)</h3><div class="chart" id="c-subs"></div></div>
+        <div class="card"><h3>Spend in file</h3><div class="chart" id="c-spend"></div></div>
+        <div class="card"><h3>Columns picked by hand</h3><div id="t-cols"></div><p class="note">Each one is a file whose column the auto-detection missed.</p></div>
+      </div>
+    </section>
+
+    <section id="s-ai">
+      <h2>Plan writer (DeepSeek)</h2>
+      <div class="grid kpis" id="ai-kpis"></div>
+      <div class="grid g2" style="margin-top:14px">
+        <div class="card"><h3>Cost per <span id="ai-bucket">day</span> (USD, estimate)</h3><div class="chart" id="c-cost"></div></div>
+        <div class="card"><h3>Outcomes</h3><div id="t-ai-out"></div></div>
+      </div>
+    </section>
+
+    <section id="s-rev">
+      <h2>Revenue &amp; credits</h2>
+      <p class="empty" id="rev-none" hidden>No billing data yet. The billing part of the dashboard isn't deployed, or nothing has been sold.</p>
+      <div id="rev-body">
+        <div class="grid kpis" id="rev-kpis"></div>
+        <div class="card" style="margin-top:14px"><h3>Free plan budget today (UTC)</h3><div id="rev-meter"></div></div>
+        <div class="grid g2" style="margin-top:14px">
+          <div class="card"><h3>Recent orders</h3><div id="t-orders"></div></div>
+          <div class="card"><h3>API usage by key</h3><div id="t-apikeys"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s-err">
+      <h2>Errors</h2>
+      <div class="grid g2">
+        <div class="card"><h3>Audit errors (user-facing)</h3><div id="t-aerr"></div></div>
+        <div class="card"><h3>JavaScript errors</h3><div id="t-jserr"></div></div>
+      </div>
+    </section>
+
+    <section id="s-logs">
+      <h2>Event log</h2>
+      <div class="card">
+        <div class="logtools">
+          <select id="lf-type"><option value="">All types</option></select>
+          <input type="search" id="lf-q" placeholder="Search path, referrer, props, session, visitor…">
+          <span id="lf-sid"></span>
+          <button class="lnk" id="lf-csv">Export CSV</button>
+        </div>
+        <div class="scroll"><table id="t-log"></table></div>
+        <div class="pager"><button class="lnk" id="lp-prev">Newer</button><span id="lp-info"></span><button class="lnk" id="lp-next">Older</button></div>
+        <p class="note">Newest 2,000 events in the range. Click a row for its full payload; click a session to see that visit end to end.</p>
+      </div>
+    </section>
+
+    <section id="s-ailogs">
+      <h2>AI request log</h2>
+      <div class="card">
+        <div class="logtools"><select id="af-out"><option value="">All outcomes</option></select><button class="lnk" id="af-csv">Export CSV</button></div>
+        <div class="scroll"><table id="t-ailog"></table></div>
+        <p class="note">Newest 1,000 requests in the range. Cost is estimated from DeepSeek's published per-token rates, including the off-peak discount.</p>
+      </div>
+    </section>
+    <p class="note" id="foot"></p>
+  </div>
+  <dialog id="dlg"><div id="dlg-body"></div><p style="margin-top:12px"><button class="lnk" id="dlg-close">Close</button></p></dialog>
+</div>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

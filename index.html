@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subreddit Audit: find the subreddits wasting your Reddit ad budget</title>
+<meta name="description" content="Free Reddit Ads audit. Upload your subreddit report and see which communities to cut, which deserve more budget, and which just need more data. Runs in your browser, nothing is uploaded.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Subreddit Audit: find the subreddits wasting your Reddit ad budget">
+<meta property="og:description" content="Free Reddit Ads audit. Upload your subreddit report and see which communities to cut, which deserve more budget, and which just need more data. Runs in your browser, nothing is uploaded.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Subreddit Audit: find the subreddits wasting your Reddit ad budget">
+<meta name="twitter:description" content="Free Reddit Ads audit. Upload your subreddit report and see which communities to cut, which deserve more budget, and which just need more data. Runs in your browser, nothing is uploaded.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Subreddit Audit",
+  "url": "https://safi-urrehman9.github.io/subreddit-audit/"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Subreddit Audit",
+  "url": "https://safi-urrehman9.github.io/subreddit-audit/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (runs in the browser)",
+  "description": "Analyses a Reddit Ads subreddit (community) report and labels each subreddit cut, spend more, or keep testing, using empirical Bayes shrinkage so small samples are not misjudged.",
+  "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "USD"
+  },
+  "featureList": [
+   "Per-subreddit cost per conversion with uncertainty ranges",
+   "Cut / spend more / keep testing verdicts at 90% confidence",
+   "Runs locally in the browser, no upload",
+   "CSV export of results"
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "How do I know if a subreddit is wasting my Reddit ad budget?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Compare the subreddit's cost per conversion with your target, but only after it has enough data. A subreddit that has spent about 2.3 times your target cost per conversion without a single conversion can be cut with 90% confidence. With fewer clicks than that, a zero is usually bad luck, not proof."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Does Subreddit Audit upload my Reddit Ads data?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "No. The file is read and analysed inside your browser tab, and there is no account to create. Only if you click Write my plan are the subreddit names and numbers from the results (not the file) sent to the server and DeepSeek's API to write the plan."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Which Reddit Ads report do I need?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "A report from Reddit Ads Manager broken down by community (subreddit), with spend, clicks and conversions columns, exported as CSV. 30 days or more of data works best."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Why does the audit disagree with the Reddit Ads dashboard?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "The dashboard divides spend by conversions for each subreddit on its own, so a subreddit with four clicks and no sales shows an infinite cost. The audit weighs each subreddit against how your whole account converts, which pulls small samples toward the account average and leaves large samples mostly unchanged."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Does it work for interest-targeted or Max campaigns?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Only partly. Reddit reports detailed per-subreddit numbers for ad groups that target specific communities. Interest-targeted and Max campaigns report subreddit delivery in aggregate, so the audit has less to work with."
+    }
+   }
+  ]
+ }
+]
+</script>
+<script src="/subreddit-audit/audit.js?v=2bb14748" defer></script>
+<script src="/subreddit-audit/app.js?v=2bb14748" defer></script>
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <h1>Find the subreddits eating your Reddit ad budget.</h1>
+      <p class="lede">Upload your Reddit Ads report and get a call on every subreddit: <strong>cut it, spend more, or keep testing.</strong> It weighs small samples fairly, so four unlucky clicks don't get a good community killed.</p>
+
+      <div class="intake">
+        <label class="drop" id="drop">
+          <input type="file" id="file" accept=".csv,text/csv">
+          <b>Drop your Reddit Ads CSV here</b>
+          <span>or click to choose it. Subreddit breakdown with spend, clicks and conversions.</span>
+        </label>
+        <button type="button" id="sample">Try sample data</button>
+      </div>
+      <div class="controls">
+        <label>Target cost per conversion ($) <input type="number" id="target" min="0" step="any" placeholder="Account avg."></label>
+        <details class="cols" id="cols" hidden><summary id="cols-summary"></summary><div class="grid" id="cols-grid"></div></details>
+      </div>
+      <p class="privacy-note">Your file is read in this tab and never uploaded. No signup.</p>
+      <div class="error" id="error" role="alert"></div>
+    </div>
+
+    <figure class="stack" aria-label="Example: a Reddit Ads report marked up by the audit" style="margin:0">
+      <div class="paper sheet-ledger">
+        <p class="sheet-title">Last 30 days, target $80 per sale</p>
+        <table>
+          <thead><tr><th>Subreddit</th><th class="r">Clicks</th><th class="r">Dashboard</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="mark">r/SaaS<svg class="strike draw d1" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M0 7 C 30 3, 60 9, 100 5" fill="none" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span></td>
+              <td class="r">1,000</td><td class="r">$300</td>
+              <td><span class="pen c-red fade-in d1">cut. ~$1,020 over</span></td>
+            </tr>
+            <tr>
+              <td>r/startups</td><td class="r">300</td>
+              <td class="r"><span class="mark">$30<svg class="ring draw d2" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><ellipse pathLength="1" cx="50" cy="25" rx="47" ry="21" fill="none" stroke="var(--blue)" stroke-width="2.4" vector-effect="non-scaling-stroke" transform="rotate(-3 50 25)"/></svg></span></td>
+              <td><span class="pen c-blue fade-in d2">spend more</span></td>
+            </tr>
+            <tr>
+              <td>r/Entrepreneur</td>
+              <td class="r"><span class="mark">4<svg class="ring draw d3" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true"><ellipse pathLength="1" cx="50" cy="25" rx="47" ry="21" fill="none" stroke="var(--red)" stroke-width="2.4" vector-effect="non-scaling-stroke" transform="rotate(4 50 25)"/></svg></span></td>
+              <td class="r">∞</td>
+              <td><span class="pen c-wait fade-in d3">4 clicks. wait</span></td>
+            </tr>
+            <tr>
+              <td>r/sidehustle</td><td class="r">210</td><td class="r">$145</td>
+              <td><span class="pen c-wait fade-in d3">too early</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="sheet-foot"><span>Money to move</span><span class="pen c-red">$1,020 / mo</span></div>
+      </div>
+    </figure>
+  </section>
+</div>
+
+<section id="results" class="wrap" hidden aria-live="polite">
+  <p class="verdict-line" id="headline"></p>
+  <p class="subline" id="subline"></p>
+  <div class="counts" id="counts"></div>
+  <div id="warnings"></div>
+  <div class="paper ledger" id="ledger"></div>
+  <div class="legend" aria-hidden="true">
+    <span><i class="lb"></i>Likely cost per conversion (80% range)</span>
+    <span><i class="ld"></i>Best estimate</span>
+    <span><i class="lr"></i>What your dashboard shows</span>
+    <span><i class="lt"></i>Your target</span>
+  </div>
+  <div class="after">
+    <button type="button" class="primary" id="download">Download results (CSV)</button>
+    <a class="btn" id="waitlist" hidden target="_blank" rel="noopener">Get this every Monday, automatically</a>
+  </div>
+
+  <div class="paper plan" id="plan">
+    <h2>Turn this into a plan</h2>
+    <p class="plan-note">Get a short action plan and subreddits to test next. This sends the subreddit names and numbers above (not your file) to our server and DeepSeek's API. 3 free plans every 30 days, then <a href="/subreddit-audit/pricing/">credits</a>.</p>
+    <div class="plan-form">
+      <label for="plan-product">What do you sell? <span>Optional. Improves the subreddit ideas.</span>
+        <input id="plan-product" maxlength="140" placeholder="e.g. invoicing software for freelancers" autocomplete="off">
+      </label>
+      <button type="button" class="primary" id="plan-go">Write my plan</button>
+    </div>
+    <div id="plan-out" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="wrap story" id="why" aria-labelledby="why-h">
+  <div class="story-steps">
+    <div class="story-step" data-step="1">
+      <h2 id="why-h">This is what Reddit Ads shows you.</h2>
+      <p>Spend divided by conversions, one subreddit at a time. It looks precise. r/Entrepreneur is infinitely expensive, r/Bookkeeping is a star, r/SaaS is a disaster.</p>
+    </div>
+    <div class="story-step" data-step="2">
+      <h2>Some of those numbers are four clicks old.</h2>
+      <p>Zero sales from four clicks happens all the time, even in a community that converts well. The dashboard can't tell a bad subreddit from an unlucky one, so it prints the scariest possible number.</p>
+    </div>
+    <div class="story-step" data-step="3">
+      <h2>So weigh each subreddit against your whole account.</h2>
+      <p>Subreddits with little data get pulled toward how your account converts overall. Subreddits with lots of data barely move. The bars show where the real cost per conversion probably sits.</p>
+    </div>
+    <div class="story-step" data-step="4">
+      <h2>Then the calls are easy.</h2>
+      <p>Cut only when a subreddit is at least 90% likely to cost more than your target. Spend more when it's 90% likely to cost less. Everything else keeps running until the data says something.</p>
+      <p><a href="#main" class="btn primary" id="story-cta">Audit my subreddits</a></p>
+    </div>
+  </div>
+  <div class="story-sheet-wrap" aria-hidden="true">
+    <div class="paper story-sheet">
+      <div class="srow head"><span>Subreddit</span><span class="sc">Clicks</span><span>Cost per sale</span><span></span></div>
+      <div class="srow cut" style="--raw:69.2%;--est:66.1%">
+        <span class="sn">r/SaaS<svg class="sstrike" viewBox="0 0 100 12" preserveAspectRatio="none"><path pathLength="1" d="M0 7 C 30 3, 60 9, 100 5" fill="none" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg></span>
+        <span class="sc"><span>1,000</span></span>
+        <div class="strack"><i class="target"></i><i class="band" style="left:53.9%;width:26.6%"></i><i class="raw"></i><i class="dot"></i></div>
+        <span class="sverdict pen c-red">cut</span>
+      </div>
+      <div class="srow scale" style="--raw:10.4%;--est:14.3%">
+        <span class="sn">r/startups</span><span class="sc"><span>300</span></span>
+        <div class="strack"><i class="target"></i><i class="band" style="left:6.8%;width:16%"></i><i class="raw"></i><i class="dot"></i></div>
+        <span class="sverdict pen c-blue">more</span>
+      </div>
+      <div class="srow scale" style="--raw:10.4%;--est:19.5%">
+        <span class="sn">r/Bookkeeping</span><span class="sc"><span>110</span></span>
+        <div class="strack"><i class="target"></i><i class="band" style="left:8.4%;width:24.2%"></i><i class="raw"></i><i class="dot"></i></div>
+        <span class="sverdict pen c-blue">more</span>
+      </div>
+      <div class="srow test" style="--raw:50.6%;--est:47.4%">
+        <span class="sn">r/sidehustle</span><span class="sc"><span>210</span></span>
+        <div class="strack"><i class="target"></i><i class="band" style="left:31%;width:37.2%"></i><i class="raw"></i><i class="dot"></i></div>
+        <span class="sverdict pen c-wait">wait</span>
+      </div>
+      <div class="srow test small" style="--raw:100%;--est:43.2%">
+        <span class="sn">r/Entrepreneur</span><span class="sc"><span>4</span><span class="story-note note-small pen" style="right:-8px;top:-22px">4 clicks!</span></span>
+        <div class="strack"><i class="target"></i><i class="band" style="left:17.9%;width:62.5%"></i><i class="raw"></i><i class="dot"></i></div>
+        <span class="sverdict pen c-wait">wait</span>
+      </div>
+      <div class="axis-lbl"><span>$20</span><b>$80 target</b><span>$1,000+</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="export-h">
+  <div class="section-head">
+    <h2 id="export-h">Get the report out of Reddit Ads Manager</h2>
+    <p>Takes about a minute. You need conversion tracking (the Reddit Pixel or Conversions API) switched on.</p>
+  </div>
+  <ol class="steps">
+    <li>Open <strong>Reporting</strong> in Reddit Ads Manager and pick a date range. 30 days or more works best.</li>
+    <li>Break the report down by <strong>Community</strong>. Under placement, choose subreddit.</li>
+    <li>Under <strong>Metrics</strong>, make sure Spend, Clicks and Conversions are showing.</li>
+    <li>Click <strong>Export</strong>, then drop the CSV into the box at the top of this page.</li>
+  </ol>
+  <p class="aside-note">Reddit reports detailed per-subreddit numbers only for ad groups that target specific communities. Interest-targeted and Max campaigns show subreddit delivery in aggregate.</p>
+</section>
+
+<section class="paper rule wrap" aria-labelledby="rule-h">
+  <div class="big" aria-hidden="true">2.3×<span class="pen">your target</span></div>
+  <div>
+    <h2 id="rule-h">No report handy? Use the 2.3× rule.</h2>
+    <p>If a subreddit has spent 2.3 times your target cost per conversion and hasn't produced a single conversion, cut it. At that point there's less than a 10% chance it's actually hitting your target. Before that, a zero is mostly noise.</p>
+    <p><a href="/subreddit-audit/reddit-ads-calculator/">Check a subreddit with the calculator</a></p>
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="faq-h">
+  <div class="section-head"><h2 id="faq-h">Questions people ask</h2></div>
+  <div class="faq">
+    <details><summary>How do I know if a subreddit is wasting my budget?</summary>
+      <p>Compare its cost per conversion with your target, but only once it has enough data. A subreddit that has spent about 2.3 times your target without a conversion can be cut with 90% confidence. With less spend than that, a zero is usually bad luck. The audit goes further by using your other subreddits as evidence, so it can often decide sooner.</p></details>
+    <details><summary>Do you upload or store my Reddit Ads data?</summary>
+      <p>No. The CSV is read and analysed inside your browser tab, there's no account, and closing the tab clears it. The audit itself never leaves your browser. Only if you click <strong>Write my plan</strong> are the subreddit names and numbers from the results (not the file) sent to our server and DeepSeek's API. Identical requests are answered from a cache for 30 days. <a href="/subreddit-audit/privacy/">Details</a>.</p></details>
+    <details><summary>Does the plan change the audit's verdicts?</summary>
+      <p>No. Cut, spend more and keep testing come from the statistics, not the language model. The plan explains those calls in plain English and suggests communities to test next. Check each suggested subreddit yourself before spending on it.</p></details>
+    <details><summary>Why does this disagree with the Reddit Ads dashboard?</summary>
+      <p>The dashboard judges each subreddit alone. Four clicks and no sale shows as an infinite cost. The audit weighs each subreddit against how your whole account converts, so small samples get pulled toward your average and large samples speak for themselves. <a href="/subreddit-audit/methodology/">The full method is here.</a></p></details>
+    <details><summary>What does "keep testing" mean?</summary>
+      <p>There isn't enough data to say whether the subreddit beats your target. Leave it running, or cap its budget, and check again next week.</p></details>
+    <details><summary>Does it work for interest-targeted or Max campaigns?</summary>
+      <p>Partly. Reddit only reports detailed per-subreddit numbers for ad groups that target specific communities. For interest and Max campaigns the subreddit numbers are aggregated, so there's less to work with.</p></details>
+    <details><summary>Who built this?</summary>
+      <p>An independent data scientist who got tired of watching people kill good subreddits over four clicks. It's free while it's being tested with real accounts.</p></details>
+  </div>
+</section>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

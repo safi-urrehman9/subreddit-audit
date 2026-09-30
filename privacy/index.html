@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy: your Reddit Ads data never leaves your browser</title>
+<meta name="description" content="Subreddit Audit reads your Reddit Ads report inside your browser. No uploads, no accounts, no cookies. Anonymous usage counts only. The optional plan writer sends only the audit results; buying credits and the API are described here.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/privacy/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Privacy: your Reddit Ads data never leaves your browser">
+<meta property="og:description" content="Subreddit Audit reads your Reddit Ads report inside your browser. No uploads, no accounts, no cookies. Anonymous usage counts only. The optional plan writer sends only the audit results; buying credits and the API are described here.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/privacy/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy: your Reddit Ads data never leaves your browser">
+<meta name="twitter:description" content="Subreddit Audit reads your Reddit Ads report inside your browser. No uploads, no accounts, no cookies. Anonymous usage counts only. The optional plan writer sends only the audit results; buying credits and the API are described here.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[]
+</script>
+
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<article class="wrap article">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/subreddit-audit/">Subreddit Audit</a> / Privacy</nav>
+  <h1>Privacy</h1>
+  <p class="answer">Your Reddit Ads report is read and analysed inside your browser tab. The file is never uploaded. If you choose to use the plan writer, only the audit results are sent to write your plan. If you buy credits or use the API, the details are below.</p>
+  <h2>What happens to your file</h2>
+  <p>When you choose or drop a CSV, your browser reads it into memory and the audit runs as JavaScript on your own device. There is no server that receives it. Closing or reloading the tab clears it. You can confirm this by opening your browser's network tab while you run an audit: no request carries your data.</p>
+  <h2>The optional plan writer</h2>
+  <p>If you click <strong>Write my plan</strong>, your browser sends the audit results (subreddit names, spend, clicks, conversions, the audit's estimates and calls, your target, and the optional "What do you sell?" text) to a server function on Supabase. It forwards them to DeepSeek's API, which writes the plan. Your CSV file itself is never sent.</p>
+  <ul>
+    <li><strong>Cache.</strong> The plan is stored for 30 days under a fingerprint of those inputs, so an identical request gets the same answer without calling the model again.</li>
+    <li><strong>Rate limits.</strong> To keep the service running, each request records a one-way hash of your IP address and the time. These records are deleted after 2 days.</li>
+    <li><strong>Free tries.</strong> The first 3 plans every 30 days are free. To count them, the site keeps a salted one-way hash of your IP address, with a count and dates, for 30 days. The salt is a secret held on the server, so the hash can't be reversed or matched against other data. Plans served from the cache don't count.</li>
+    <li><strong>Your key.</strong> If you paste a key (see below), your browser sends it with the plan request so the credits can be charged. The key is kept in this browser's local storage, and you can clear it on the <a href="/subreddit-audit/account/">account</a> page.</li>
+    <li><strong>DeepSeek.</strong> DeepSeek processes the request under its own privacy policy, and its servers are outside the US and EU. If that's a problem for your data, use the audit without the plan writer.</li>
+  </ul>
+  <h2>Buying credits</h2>
+  <p>Credits are sold by card through <a href="https://dodopayments.com/" rel="nofollow">Dodo Payments</a> or in crypto through <a href="https://nowpayments.io/" rel="nofollow">NOWPayments</a>. You pay on their page, not ours. They process your payment details and receipt email under their own privacy policies, and this site never sees your card number or wallet.</p>
+  <ul>
+    <li><strong>What we store.</strong> The order (pack, amount, provider, status and time), the email address the payment provider passes back, and your key. The key is stored only as a one-way hash, plus its first 12 characters so it can be recognised. The full key is shown to you once when you claim it and is held for up to 24 hours so a page refresh doesn't lose it, then deleted.</li>
+    <li><strong>No account.</strong> There's no password or login. Whoever holds the key can spend its credits, so keep it private.</li>
+    <li><strong>Credit ledger.</strong> Each use of a key is logged as a credit change, its reason (plan, audit, purchase or refund) and the time, so your balance and recent usage can be shown. The ledger holds no report data.</li>
+    <li><strong>Support email.</strong> If you write to <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a>, the message and your address are kept to answer you and to handle any refund.</li>
+    <li><strong>Retention.</strong> Order and ledger records are kept as long as the key exists, for accounting and support.</li>
+  </ul>
+  <h2>The developer API</h2>
+  <p>API requests send your rows or CSV text to a server, because the audit runs there. That's different from the website, where it runs in your browser. The request is processed in memory and the response returned. The data isn't stored; only usage is kept: the key, the credits used, the endpoint and the time. A plan request also produces the same plan-writer log described below and goes to DeepSeek as described above. Requests are rate limited to 60 per minute per key.</p>
+  <h2>Visitor counts</h2>
+  <p>The site uses <a href="https://www.goatcounter.com/" rel="nofollow">GoatCounter</a> to count page views and four actions: running the sample, running your own file, writing a plan and downloading results. Only the fact that the action happened is counted, never anything from your report.</p>
+  <p>GoatCounter sets no cookies and stores nothing in your browser. For each page view it records the page, the referring site, your browser and operating system, screen width, language and country. It doesn't store your IP address. It keeps your IP and browser string in memory for up to 8 hours to tell unique visits apart, then discards them.</p>
+  <h2>Usage log</h2>
+  <p>To find bugs and see which features get used, the site also keeps its own usage log on Supabase. It records page views, which site sent you (and any campaign tag in the link), time on page and how far you scrolled, your country, device type, browser, operating system, language and screen width, and actions: running an audit, picking a column by hand, writing a plan, downloading results, using the calculator, clicking a link to another site, and errors.</p>
+  <p>For an audit it records only counts and bands: how many rows and subreddits the file had, how many got each verdict, whether you set a target, how long the audit took, and which band the file's total spend falls in (under $1k, $1k–10k, $10k–100k, over $100k). It never records subreddit names, amounts or anything else from the file. If the audit can't find a column, it records the file's column headers (the names at the top of each column, not the values) so detection can be improved.</p>
+  <ul>
+    <li><strong>No IP address is stored in the usage log.</strong> Visits on the same day are grouped by a one-way hash of your IP address and browser string, mixed with a random value that changes daily and is deleted after 2 days. The hash can't be reversed, and your visits on different days can't be linked.</li>
+    <li><strong>One value in your browser.</strong> A random ID for the current tab is kept in session storage, which your browser clears when you close the tab. There are no cookies.</li>
+    <li><strong>Plan writer.</strong> Each plan request also logs its outcome, how long it took, how many subreddits it covered, whether you wrote a product description (not the text), token counts and cost, and whether it was a free, paid or API request (with the key's ID for paid and API requests).</li>
+    <li><strong>Retention.</strong> The usage log is kept for up to 400 days.</li>
+  </ul>
+  <h2>What else this site collects</h2>
+  <p>Nothing beyond the above. There are no accounts, no cookies and no ad pixels. Fonts load from Google Fonts, which receives the usual request information (such as your IP address) when your browser fetches them. The site is hosted on GitHub Pages, which may keep standard server logs.</p>
+  <h2>Changes</h2>
+  <p>If anything else is added, this page will say so first.</p>
+  <p class="byline">Last updated 30 September 2026</p>
+</article>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

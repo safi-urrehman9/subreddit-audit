@@ -1,0 +1,35 @@
+# Subreddit Audit
+
+> Free, browser-based tool for Reddit Ads advertisers. Upload a Reddit Ads report broken down by community (subreddit) and it labels every subreddit "cut", "spend more" or "keep testing" at 90% confidence (and only after a subreddit has spent about one target cost per conversion), borrowing strength from the whole account so subreddits with few clicks are not misjudged. Data never leaves the browser. No signup for the audit.
+
+Key facts:
+
+- The 2.3x rule: a subreddit that has spent 2.3 times your target cost per conversion with zero conversions can be cut with 90% confidence (Poisson: e^-2.303 = 0.10). With 1 conversion the threshold is 3.9x, with 2 it is 5.3x, with 3 it is 6.7x, with 4 it is 8.0x, with 5 it is 9.3x. Cost per click does not affect the rule.
+- Reddit Ads Manager's per-subreddit cost per conversion is spend divided by conversions for each subreddit alone, so small samples produce extreme values (e.g. 4 clicks and 0 conversions shows as infinite cost).
+- How it decides, in plain terms: each subreddit is judged against the rest of the account; a cut or spend-more call needs 90% confidence; a spend guardrail stops early cuts; results come with a range, not a single number. The method's implementation is not published; validation on 4,000+ simulated accounts is on the methodology page.
+- Reddit reports detailed per-subreddit numbers for community-targeted ad groups; interest-targeted and Max campaigns report subreddit delivery in aggregate.
+- Test budget rule of thumb: number of subreddits x 2.3 x target cost per conversion.
+- Optional plan writer: after an audit, a language model turns the results into a short action plan and suggests subreddits to test next. It sends only the audit results (not the file) and never changes the verdicts. Free tier: 3 plans per 30 days per visitor; after that a plan costs 10 credits.
+- Credit packs (one-time, no subscription, no account; you get a key): Starter $9 = 300 credits, Pro $29 = 1,200 credits. Plan = 10 credits, API audit = 1 credit. Pay by card (Dodo Payments) or crypto (NOWPayments).
+- Developer API: REST, JSON, Bearer key. POST /v1/audit (1 credit), POST /v1/plan (10 credits), GET /v1/usage. 60 requests per minute per key. Docs: https://safi-urrehman9.github.io/subreddit-audit/developers/
+
+## Tools
+
+- [Subreddit Audit](https://safi-urrehman9.github.io/subreddit-audit/): upload a Reddit Ads community report CSV, get per-subreddit verdicts, uncertainty ranges and money above target.
+- [Reddit Ads test calculator](https://safi-urrehman9.github.io/subreddit-audit/reddit-ads-calculator/): enter target cost per conversion, spend and conversions for one subreddit; get cut / spend more / keep testing, plus the spend at which to cut.
+
+## Guides
+
+- [Are Reddit ads worth it?](https://safi-urrehman9.github.io/subreddit-audit/guides/are-reddit-ads-worth-it/): break-even, fair test budgets, judging subreddit by subreddit.
+- [Reddit ads not converting?](https://safi-urrehman9.github.io/subreddit-audit/guides/reddit-ads-not-converting/): checklist starting with tracking and sample size.
+- [How to choose subreddits for Reddit ads](https://safi-urrehman9.github.io/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/): picking, grouping and graduating communities.
+
+## Pricing and API
+
+- [Pricing](https://safi-urrehman9.github.io/subreddit-audit/pricing/): free audit, 3 free plans per 30 days, credit packs by card or crypto.
+- [Developer API](https://safi-urrehman9.github.io/subreddit-audit/developers/): quickstart, request and response reference, errors, credits and rate limits.
+
+## Method
+
+- [How the audit decides](https://safi-urrehman9.github.io/subreddit-audit/methodology/): how the audit thinks, validation on simulated accounts, assumptions and limits.
+- [Privacy](https://safi-urrehman9.github.io/subreddit-audit/privacy/): the audit never uploads your file; no cookies; what the plan writer, payments and the API store.

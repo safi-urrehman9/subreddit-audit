@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your key · Subreddit Audit</title>
+<meta name="description" content="Collect and manage your Subreddit Audit key.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://safi-urrehman9.github.io/subreddit-audit/account/">
+<meta name="google-site-verification" content="AHdvfdzdLfOB01iVPuDheORFzdBFdgph4BpYNHkBlCg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Subreddit Audit">
+<meta property="og:title" content="Your key · Subreddit Audit">
+<meta property="og:description" content="Collect and manage your Subreddit Audit key.">
+<meta property="og:url" content="https://safi-urrehman9.github.io/subreddit-audit/account/">
+<meta property="og:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your key · Subreddit Audit">
+<meta name="twitter:description" content="Collect and manage your Subreddit Audit key.">
+<meta name="twitter:image" content="https://safi-urrehman9.github.io/subreddit-audit/og.png">
+<meta name="theme-color" content="#F4F6F1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15181C" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/subreddit-audit/favicon.svg" type="image/svg+xml">
+<link rel="sitemap" type="application/xml" href="/subreddit-audit/sitemap.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nanum+Pen+Script&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/subreddit-audit/site.css?v=2bb14748">
+<script type="application/ld+json">
+[]
+</script>
+
+<script src="/subreddit-audit/track.js?v=2bb14748" defer></script>
+<script data-goatcounter="https://subreddit-audit.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap masthead-in">
+    <a class="logo" href="/subreddit-audit/" aria-label="Subreddit Audit home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><rect x="3" y="5" width="26" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M8 12h16M8 17h10M8 22h13" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".45"/><path d="M5 18.5c6-1.2 14-2.6 23-2.2" stroke="var(--red)" stroke-width="2.6" stroke-linecap="round" fill="none"/></svg>
+      <span>Subreddit Audit</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Calculator</a>
+      <a href="/subreddit-audit/guides/">Guides</a>
+      <a href="/subreddit-audit/methodology/">How it works</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<div class="acct">
+  <h1>Your key</h1>
+
+  <section id="claim" hidden aria-live="polite">
+    <div class="paper acct-card">
+      <p class="acct-state pending" id="claim-state"><i></i><span id="claim-text">Checking your payment…</span></p>
+      <p class="plan-fine" id="claim-sub"></p>
+      <div id="claim-key" hidden>
+        <div class="keyshow" id="key-show"></div>
+        <div class="row-btns"><button type="button" class="primary" id="key-copy">Copy key</button><span class="plan-fine" id="copy-msg" role="status"></span></div>
+        <p class="keep"><strong>Save it now.</strong> We can't show it again after 24 hours, and there is no account to recover it from. It's already saved in this browser, but copy it somewhere safe.</p>
+      </div>
+      <div class="row-btns" id="claim-retry" hidden><button type="button" id="claim-again">Check again</button></div>
+    </div>
+  </section>
+
+  <section id="manage">
+    <h2>Use a key</h2>
+    <p class="plan-note">Paste a key to use it on the plan writer in this browser. Keys start with <code>sa_live_</code>. Buy credits on the <a href="/subreddit-audit/pricing/">pricing page</a>.</p>
+    <form class="keybox" id="key-form">
+      <label for="key-in">Key <input id="key-in" class="keyfield" type="text" placeholder="sa_live_…" autocomplete="off" spellcheck="false" autocapitalize="off"></label>
+      <button type="submit" class="primary">Save key</button>
+      <button type="button" id="key-remove" class="lnk" hidden>Remove key</button>
+    </form>
+    <p class="keybox-msg" id="key-msg" role="status"></p>
+
+    <div class="paper acct-card" id="bal" hidden>
+      <p class="plan-fine" style="margin:0" id="bal-prefix"></p>
+      <p class="acct-bal" id="bal-credits"></p>
+      <p id="bal-plans" style="color:var(--muted)"></p>
+      <p class="plan-fine" id="bal-dates"></p>
+      <div id="bal-recent"></div>
+    </div>
+    <p class="plan-fine">The same key works in the <a href="/subreddit-audit/developers/">API</a>. Balance and usage are read from the server; the key itself is kept only in this browser's storage.</p>
+    <p class="plan-fine">Payment or key problem, or a refund (14 days, if no credits are used)? Email <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a> with the first 12 characters of your key, never the whole key. See <a href="/subreddit-audit/pricing/">pricing</a>.</p>
+  </section>
+</div>
+<script>
+(() => {
+  const BILLING = "https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/billing";
+  const USAGE = "https://mpalkhuqlmfxypfifitr.supabase.co/functions/v1/api/v1/usage";
+  const KEY_RE = /^sa_live_[0-9a-f]{32}$/;
+  const $ = (id) => document.getElementById(id);
+  const track = (t, p) => window.saTrack?.(t, p);
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} },
+  };
+  const el = (tag, text, cls) => { const e = document.createElement(tag); if (text != null) e.textContent = text; if (cls) e.className = cls; return e; };
+  const N = (v) => (+v || 0).toLocaleString("en-US");
+  const when = (t) => { const d = new Date(t); return isNaN(d) ? "" : d.toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); };
+
+  // ---------- claim ----------
+  const q = new URLSearchParams(location.search);
+  let token = q.get("claim") || store.get("sa_claim");
+  if (q.get("claim")) { store.set("sa_claim", q.get("claim")); try { history.replaceState(null, "", location.pathname); } catch {} }
+  const POLL_MS = 3000, MAX_MS = 5 * 60 * 1000;
+  let polling = false;
+
+  const state = (kind, text, sub) => {
+    $("claim-state").className = "acct-state " + kind;
+    $("claim-text").textContent = text;
+    $("claim-sub").textContent = sub || "";
+  };
+
+  async function claimOnce() {
+    const r = await fetch(BILLING + "/claim", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ claim_token: token }), signal: AbortSignal.timeout(15000) });
+    const d = await r.json().catch(() => ({}));
+    return { ok: r.ok, status: r.status, d };
+  }
+
+  async function pollClaim() {
+    if (polling) return;
+    polling = true;
+    $("claim").hidden = false; $("claim-retry").hidden = true;
+    state("pending", "Waiting for your payment to confirm…", "Card payments usually take a few seconds. Crypto can take several minutes while the network confirms. You can leave this page open.");
+    const t0 = Date.now();
+    let netFails = 0;
+    while (Date.now() - t0 < MAX_MS) {
+      try {
+        const { ok, status, d } = await claimOnce();
+        netFails = 0;
+        if (ok && d.status === "paid" && d.key) return paid(d);
+        if (ok && d.status === "failed") {
+          store.set("sa_claim", null);
+          state("failed", "This payment didn't go through.", "You haven't been given a key. If money left your account, the payment provider's receipt has the details. Try again from the pricing page.");
+          break;
+        }
+        if (!ok && status >= 400 && status < 500 && status !== 429) {
+          store.set("sa_claim", null);
+          state("failed", "We couldn't find that order.", "The link may be incomplete. If you paid, use the link from the payment provider's email.");
+          break;
+        }
+      } catch { if (++netFails >= 2) state("pending", "Waiting for your payment to confirm…", "Having trouble reaching the server. Still trying."); }
+      await new Promise((r) => setTimeout(r, POLL_MS));
+    }
+    if (!$("claim-state").classList.contains("failed")) {
+      state("pending", "Still no confirmation after 5 minutes.", "Crypto payments can be slow. Your order is kept, so check again in a while from this browser.");
+      $("claim-retry").hidden = false;
+    }
+    polling = false;
+  }
+
+  function paid(d) {
+    state("paid", `Payment received. ${d.credits != null ? N(d.credits) + " credits added." : ""}`.trim(), "");
+    $("key-show").textContent = d.key;
+    $("claim-key").hidden = false;
+    store.set("sa_key", d.key);
+    store.set("sa_claim", null);
+    track("claim_ok", { credits: d.credits });
+    polling = false;
+    showKeyState();
+    loadUsage();
+  }
+
+  $("claim-again").addEventListener("click", pollClaim);
+  $("key-copy").addEventListener("click", async () => {
+    const key = $("key-show").textContent, m = $("copy-msg");
+    try { await navigator.clipboard.writeText(key); m.textContent = "Copied."; }
+    catch { const r = document.createRange(); r.selectNodeContents($("key-show")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); m.textContent = "Selected. Press Ctrl+C or Cmd+C."; }
+  });
+
+  // ---------- key management ----------
+  function showKeyState() {
+    const k = store.get("sa_key");
+    $("key-remove").hidden = !k;
+    $("key-msg").textContent = k ? `Saved in this browser: ${k.slice(0, 12)}…` : "No key saved in this browser.";
+  }
+
+  $("key-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const v = $("key-in").value.trim();
+    if (!KEY_RE.test(v)) { $("key-msg").textContent = "That doesn't look like a key. Keys start with sa_live_ and are 40 characters long."; return; }
+    store.set("sa_key", v); $("key-in").value = "";
+    track("key_saved", { via: "account" });
+    showKeyState(); loadUsage();
+  });
+  $("key-remove").addEventListener("click", () => {
+    store.set("sa_key", null); $("bal").hidden = true; showKeyState();
+    $("key-msg").textContent = "Key removed from this browser. It still works elsewhere if you saved it.";
+  });
+
+  async function loadUsage() {
+    const k = store.get("sa_key");
+    if (!k) { $("bal").hidden = true; return; }
+    try {
+      const r = await fetch(USAGE, { headers: { Authorization: "Bearer " + k }, signal: AbortSignal.timeout(15000) });
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 401) { $("bal").hidden = true; $("key-msg").textContent = "That key wasn't recognised. Check it for typos."; return; }
+      if (!r.ok) throw new Error();
+      $("bal").hidden = false;
+      $("bal-prefix").textContent = `Key ${d.prefix || k.slice(0, 12)}…`;
+      $("bal-credits").textContent = `${N(d.credits)} credits`;
+      const plans = Math.floor((d.credits || 0) / 10);
+      $("bal-plans").textContent = `${N(plans)} ${plans === 1 ? "plan" : "plans"}, or ${N(d.credits)} API audits.`;
+      $("bal-dates").textContent = [d.created_at && `Created ${when(d.created_at)}`, d.last_used_at && `last used ${when(d.last_used_at)}`].filter(Boolean).join(", ");
+      const host = $("bal-recent"); host.replaceChildren();
+      const rows = d.recent || [];
+      if (!rows.length) { host.append(el("p", "No usage yet.", "plan-fine")); return; }
+      const t = el("table"), head = el("tr");
+      [["When", ""], ["What", ""], ["Credits", "n"]].forEach(([l, c]) => head.append(el("th", l, c)));
+      t.append(head);
+      for (const x of rows) {
+        const tr = el("tr");
+        tr.append(el("td", when(x.ts || x.created_at)), el("td", x.reason || ""), el("td", (x.delta > 0 ? "+" : "") + N(x.delta), "n"));
+        t.append(tr);
+      }
+      const sc = el("div", null, "scroll"); sc.append(t);
+      host.append(el("h3", "Recent activity"), sc);
+    } catch {
+      $("bal").hidden = true;
+      $("key-msg").textContent = "Couldn't load the balance right now. Try again in a moment.";
+    }
+  }
+
+  showKeyState();
+  if (token) pollClaim();
+  loadUsage();
+})();
+</script>
+
+</main>
+<footer class="colophon">
+  <div class="wrap colophon-in">
+    <div>
+      <p class="colophon-name">Subreddit Audit</p>
+      <p>A tool for people paying for Reddit ads. The audit is free and your file stays in your browser.</p>
+      <p>Support: <a href="mailto:heckitshim@gmail.com">heckitshim@gmail.com</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/subreddit-audit/">Run an audit</a>
+      <a href="/subreddit-audit/reddit-ads-calculator/">Reddit Ads test calculator</a>
+      <a href="/subreddit-audit/guides/are-reddit-ads-worth-it/">Are Reddit ads worth it?</a>
+      <a href="/subreddit-audit/guides/reddit-ads-not-converting/">Reddit ads not converting</a>
+      <a href="/subreddit-audit/guides/how-to-choose-subreddits-for-reddit-ads/">Choosing subreddits</a>
+      <a href="/subreddit-audit/methodology/">Methodology</a>
+      <a href="/subreddit-audit/pricing/">Pricing</a>
+      <a href="/subreddit-audit/developers/">API</a>
+      <a href="/subreddit-audit/privacy/">Privacy</a>
+      <a href="/subreddit-audit/terms/">Terms</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
